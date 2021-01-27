@@ -105,7 +105,7 @@ export default class Dashboard extends React.Component {
         <Space />
         <Text style={styles.textER}>E o resultado foi:</Text>
         <Space />
-        <Text style={styles.textResult}>Cancro.</Text>
+        <Text style={styles.textResult}>Piolhos</Text>
         <Space />
         <TouchableWithoutFeedback
           onPress={() => this.props.navigation.navigate('Diagnostico')}>

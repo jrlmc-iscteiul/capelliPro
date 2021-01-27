@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Text, Button, Input} from 'react-native-elements';
 import {View} from 'react-native';
+import Spacer from './Spacer';
 
 const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
   const [email, setEmail] = useState('');
@@ -30,6 +31,7 @@ const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
         placeholder="Introduza a sua password"
       />
 
+      <Spacer />
       <View style={styles.buttonContainer}>
         <Button
           buttonStyle={{backgroundColor: '#5A5757'}}
