@@ -1,5 +1,7 @@
+/* eslint-disable prettier/prettier */
 import createDataContext from './createDataContext';
-import trackerApi from '../api/tracker';
+//import trackerApi from '../api/tracker';
+import ServerApi from '../api/ServerCapelliPro';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {navigate} from '../navigationRef';
 
@@ -22,10 +24,12 @@ const clearErrorMessage = (dispatch) => () => {
   dispatch({type: 'clear_error_message'});
 };
 
-const signin = (dispatch) => async ({email, password}) => {
+const signin = (dispatch) => async ({username, password}) => {
   try {
     console.log('signin');
-    const response = await trackerApi.post('/signin', {email, password});
+
+    const response = await ServerApi.post('/api/Auth/login', {username, password});
+
     console.log(response.data);
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({type: 'signin', payload: response.data.token});
@@ -38,14 +42,14 @@ const signin = (dispatch) => async ({email, password}) => {
   }
 };
 
-const signup = (dispatch) => async ({email, password}) => {
+const signup = (dispatch) => async ({username, email, password}) => {
   try {
     console.log('signup');
-    const response = await trackerApi.post('/signup', {email, password});
+    const response = await ServerApi.post('/api/Auth/register', {username, email, password});
     console.log('Erro:' + response.data.token);
     await AsyncStorage.setItem('token', response.data.token);
     console.log('async');
-    dispatch({type: 'signin', payload: response.data.token});
+    dispatch({type: 'signup', payload: response.data.token});
     console.log('dispatch');
 
     navigate('Survey');

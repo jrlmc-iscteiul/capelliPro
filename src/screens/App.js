@@ -11,8 +11,8 @@ import 'react-native-gesture-handler';
 
 import {createDrawerNavigator} from 'react-navigation-drawer';
 
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 //import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import ResolveAuthScreen from '../screens/ResolveAuthScreen';
@@ -29,10 +29,8 @@ import LoginFrame from './loginFrame';
 import Survey from './Survey';
 import Settings from './settings';
 import CapilarDiagnosticResult from './capilarDiagnosticResult';
-import { Provider as AuthProvider } from '../context/AuthContext';
-import { setNavigator } from '../navigationRef';
-
-
+import {Provider as AuthProvider} from '../context/AuthContext';
+import {setNavigator} from '../navigationRef';
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
@@ -40,28 +38,30 @@ const switchNavigator = createSwitchNavigator({
     getStarted: GetStarted,
     Signup: RegisterFrame,
     Signin: LoginFrame,
-    Survey: Survey
+    Survey: Survey,
   }),
-  mainFlow: createDrawerNavigator({
-    Perfil: {
-      screen: Dashboard,
+  mainFlow: createDrawerNavigator(
+    {
+      Perfil: {
+        screen: Dashboard,
+      },
+      Diagnostico: {
+        screen: CapilarDiagnostic,
+      },
+      Estatisticas: {
+        screen: Statistics,
+      },
+      Previsoes: {
+        screen: Forecasts,
+      },
+      Configuracoes: {
+        screen: Settings,
+      },
     },
-    Diagnostico: {
-      screen: CapilarDiagnostic,
+    {
+      contentComponent: CustomDrawerContent,
     },
-    Estatisticas: {
-      screen: Statistics,
-    },
-    Previsoes: {
-      screen: Forecasts,
-    },
-    Configuracoes: {
-      screen: Settings
-    },
-    
-  },{
-    contentComponent: CustomDrawerContent,
-  }),
+  ),
 });
 
 const App = createAppContainer(switchNavigator);
@@ -69,7 +69,11 @@ const App = createAppContainer(switchNavigator);
 export default () => {
   return (
     <AuthProvider>
-      <App ref={(navigator) => {setNavigator(navigator)}}/>
+      <App
+        ref={(navigator) => {
+          setNavigator(navigator);
+        }}
+      />
     </AuthProvider>
   );
 };
