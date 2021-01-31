@@ -13,16 +13,6 @@ import {NavigationEvents} from 'react-navigation';
 import NavLink from '../components/NavLink';
 import Spacer from '../components/Spacer';
 
-/*
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-*/
-
 const RegisterFrame = ({navigation}) => {
   const {state, signup, clearErrorMessage} = useContext(AuthContext);
 
