@@ -14,14 +14,14 @@ import Spacer from '../components/Spacer';
 
 class Survey extends React.Component {
   state = {
-    firstQuestion: null,
-    secondQuestion: null,
-    thirdQuestion: null,
-    fourthQuestion: null,
-    fifthQuestion: null,
-    sixthQuestion: null,
-    eighthQuestion: null,
-    ninethQuestion: null,
+    age: null,
+    hairType: null,
+    hasColouredHair: null,
+    hairColour: null,
+    numberWashes: null,
+    livingPlace: null,
+    useThermalProducts: null,
+    desiredHair: null,
   };
 
   render() {
@@ -45,10 +45,10 @@ class Survey extends React.Component {
 
             <View style={styles.picker}>
               <Picker
-                selectedValue={this.state.firstQuestion}
+                selectedValue={this.state.age}
                 //itemStyle={{fontFamily: 'Roboto', fontSize: 13}}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({firstQuestion: itemValue})
+                  this.setState({age: itemValue})
                 }>
                 <Picker.Item label="Menos de 18 anos" value="under18" />
                 <Picker.Item label="18-25 anos" value="18-25" />
@@ -67,9 +67,9 @@ class Survey extends React.Component {
 
             <View style={styles.picker}>
               <Picker
-                selectedValue={this.state.secondQuestion}
+                selectedValue={this.state.hairType}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({secondQuestion: itemValue})
+                  this.setState({hairType: itemValue})
                 }>
                 <Picker.Item label="Liso" value="liso" />
                 <Picker.Item label="Ondulado" value="ondulado" />
@@ -83,9 +83,9 @@ class Survey extends React.Component {
 
             <View style={styles.picker}>
               <Picker
-                selectedValue={this.state.thirdQuestion}
+                selectedValue={this.state.hasColouredHair}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({thirdQuestion: itemValue})
+                  this.setState({hasColouredHair: itemValue})
                 }>
                 <Picker.Item label="Sim" value="yes" />
                 <Picker.Item label="Não" value="no" />
@@ -99,9 +99,9 @@ class Survey extends React.Component {
 
             <View style={styles.picker}>
               <Picker
-                selectedValue={this.state.fourthQuestion}
+                selectedValue={this.state.hairColour}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({fourthQuestion: itemValue})
+                  this.setState({hairColour: itemValue})
                 }>
                 <Picker.Item label="Preto" value="preto" />
                 <Picker.Item label="Castanho" value="castanho" />
@@ -119,9 +119,9 @@ class Survey extends React.Component {
 
             <View style={styles.picker}>
               <Picker
-                selectedValue={this.state.fifthQuestion}
+                selectedValue={this.state.numberWashes}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({fifthQuestion: itemValue})
+                  this.setState({numberWashes: itemValue})
                 }>
                 <Picker.Item label="1x por semana" value="1x" />
                 <Picker.Item label="2-3x por semana" value="2-3x" />
@@ -135,9 +135,9 @@ class Survey extends React.Component {
 
             <View style={styles.picker}>
               <Picker
-                selectedValue={this.state.sixthQuestion}
+                selectedValue={this.state.livingPlace}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({sixthQuestion: itemValue})
+                  this.setState({livingPlace: itemValue})
                 }>
                 <Picker.Item label="Centro urbano" value="centroUrbano" />
                 <Picker.Item label="Arredores" value="arredores" />
@@ -166,9 +166,9 @@ class Survey extends React.Component {
 
             <View style={styles.picker}>
               <Picker
-                selectedValue={this.state.eighthQuestion}
+                selectedValue={this.state.useThermalProducts}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({eighthQuestion: itemValue})
+                  this.setState({useThermalProducts: itemValue})
                 }>
                 <Picker.Item label="Sim" value="yes" />
                 <Picker.Item label="Não" value="no" />
@@ -182,9 +182,9 @@ class Survey extends React.Component {
 
             <View style={styles.picker}>
               <Picker
-                selectedValue={this.state.ninethQuestion}
+                selectedValue={this.state.desiredHair}
                 onValueChange={(itemValue, itemIndex) =>
-                  this.setState({ninethQuestion: itemValue})
+                  this.setState({desiredHair: itemValue})
                 }>
                 <Picker.Item label="Longo" value="longo" />
                 <Picker.Item label="Liso" value="liso" />
@@ -222,7 +222,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flex: 1,
     alignItems: 'center',
-    // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     justifyContent: 'flex-start',
     flexDirection: 'column',
     width: '100%',
@@ -230,13 +229,10 @@ const styles = StyleSheet.create({
   },
   view: {
     flex: 1,
-    //backgroundColor: 'pink',
     alignContent: 'flex-start',
-    // alignItems:'center',
     width: '100%',
   },
   backgroundImage: {
-    //flex: 1,
     resizeMode: 'cover',
     height: 100,
     width: '100%',
@@ -271,7 +267,6 @@ const styles = StyleSheet.create({
     fontStyle: 'normal',
   },
   picker: {
-    // backgroundColor: '#d3d3d3',
     borderWidth: 1,
     borderRadius: 4,
     borderColor: '#d3d3d3',

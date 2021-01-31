@@ -79,6 +79,16 @@ const tryLocalSignin = (dispatch) => async () => {
   }
 };
 
+const sendSurvey = (dispatch) => async ({age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair}) => {
+  try {
+     console.log('sendSurvey');
+      const response = await ServerApi.post('/api/Auth/survey', {age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair});
+      navigate('Perfil');
+  } catch (error) {
+    
+  }
+}
+
 export const {Provider, Context} = createDataContext(
   authReducer,
   {signin, signup, signout, clearErrorMessage, tryLocalSignin},

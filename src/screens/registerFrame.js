@@ -6,7 +6,7 @@ import {
   StatusBar,
   Platform,
 } from 'react-native';
-import {Text, Input} from 'react-native-elements';
+import {Text} from 'react-native-elements';
 import {Context as AuthContext} from '../context/AuthContext';
 import AuthFormRegister from '../components/AuthFormRegister';
 import {NavigationEvents} from 'react-navigation';
