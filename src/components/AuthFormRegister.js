@@ -9,7 +9,7 @@ const AuthFormRegister = ({
   onSubmit,
   submitButtonText,
 }) => {
-  const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -18,8 +18,8 @@ const AuthFormRegister = ({
       <Input
         style={styles.inputText}
         label="Nome"
-        value={username}
-        onChangeText={setUsername}
+        value={name}
+        onChangeText={setName}
         autoCapitalize="none"
         autoCorrect={false}
         placeholder="Introduza o seu nome completo"
@@ -56,7 +56,7 @@ const AuthFormRegister = ({
         <Button
           buttonStyle={{backgroundColor: '#5A5757'}}
           title={submitButtonText}
-          onPress={() => onSubmit({username, email, password})}
+          onPress={() => onSubmit({name, email, password})}
         />
       </View>
 

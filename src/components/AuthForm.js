@@ -35,6 +35,7 @@ const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
 
       <View style={styles.buttonContainer}>
         <Button
+          // eslint-disable-next-line react-native/no-inline-styles
           buttonStyle={{backgroundColor: '#5A5757'}}
           title={submitButtonText}
           onPress={() => onSubmit({username, password})}

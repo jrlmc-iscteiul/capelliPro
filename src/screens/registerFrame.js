@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {useState, useContext} from 'react';
 import {
   SafeAreaView,
@@ -27,7 +26,7 @@ import {
 const RegisterFrame = ({navigation}) => {
   const {state, signup, clearErrorMessage} = useContext(AuthContext);
 
-  console.log(state);
+  console.log('state: ' + state);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.view}>
@@ -101,6 +100,5 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
 });
-
 
 export default RegisterFrame;

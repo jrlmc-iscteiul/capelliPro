@@ -9,6 +9,7 @@ import {
   Platform,
 } from 'react-native';
 import {Text} from 'react-native-elements';
+import Spacer from '../components/Spacer';
 
 class GetStartedFrame extends React.Component {
   render() {
@@ -26,18 +27,17 @@ class GetStartedFrame extends React.Component {
           style={styles.image2}
           source={require('../Imagens/imgGetStarted.png')}
         />
-        <View
-          style={{
-            width: '100%',
-            height: 40,
-          }}></View>
 
+        <Spacer />
+        
         <View style={styles.view}>
           <Text numberOfLines={4} ellipsizeMode="tail">
             A CapelliPro é uma forma de tratares do teu cabelo no conforto da
             tua casa, vai revolucionar os teus hábitos de tratamento!
           </Text>
         </View>
+
+        <Spacer />
 
         <Button
           style={styles.button}

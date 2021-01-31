@@ -30,7 +30,9 @@ const signin = (dispatch) => async ({username, password}) => {
 
     const response = await ServerApi.post('/api/Auth/login', {username, password});
 
-    console.log(response.data);
+    console.log('response: ' + response.data);
+    console.log('response: ' + response.data.token);
+
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({type: 'signin', payload: response.data.token});
     navigate('mainFlow');
@@ -42,11 +44,10 @@ const signin = (dispatch) => async ({username, password}) => {
   }
 };
 
-const signup = (dispatch) => async ({username, email, password}) => {
+const signup = (dispatch) => async ({name, email, password}) => {
   try {
     console.log('signup');
-    const response = await ServerApi.post('/api/Auth/register', {username, email, password});
-    console.log('Erro:' + response.data.token);
+    const response = await ServerApi.post('/api/Auth/register', {name, email, password});
     await AsyncStorage.setItem('token', response.data.token);
     console.log('async');
     dispatch({type: 'signup', payload: response.data.token});
@@ -54,6 +55,7 @@ const signup = (dispatch) => async ({username, email, password}) => {
 
     navigate('Survey');
   } catch (err) {
+    console.log(err);
     console.log('catch:');
     dispatch({
       type: 'add_error',
