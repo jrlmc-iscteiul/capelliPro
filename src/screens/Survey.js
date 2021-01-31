@@ -38,13 +38,9 @@ class Survey extends React.Component {
           <Text style={styles.subText}>Vamos começar!</Text>
         </ImageBackground>
 
-        <ScrollView
-          contentContainerStyle={{
-            width: '100%',
-            flexGrow: 1,
-            justifyContent: 'center',
-          }}>
+        <ScrollView>
           <View style={styles.view}>
+            <Spacer />
             <Text style={styles.questionsText}>1. Quantos anos tem?</Text>
 
             <View style={styles.picker}>
@@ -63,6 +59,7 @@ class Survey extends React.Component {
                 <Picker.Item label="Acima de 65 anos" value="over65" />
               </Picker>
             </View>
+            <Spacer />
 
             <Text style={styles.questionsText}>
               2. Qual é o seu tipo de cabelo?
@@ -71,7 +68,6 @@ class Survey extends React.Component {
             <View style={styles.picker}>
               <Picker
                 selectedValue={this.state.secondQuestion}
-                itemStyle={{fontFamily: 'Roboto', fontSize: 13}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.setState({secondQuestion: itemValue})
                 }>
@@ -81,13 +77,13 @@ class Survey extends React.Component {
                 <Picker.Item label="Frisado" value="frisado" />
               </Picker>
             </View>
+            <Spacer />
 
             <Text style={styles.questionsText}>3. Tem cabelo pintado?</Text>
 
             <View style={styles.picker}>
               <Picker
                 selectedValue={this.state.thirdQuestion}
-                itemStyle={{fontFamily: 'Roboto', fontSize: 13}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.setState({thirdQuestion: itemValue})
                 }>
@@ -95,6 +91,7 @@ class Survey extends React.Component {
                 <Picker.Item label="Não" value="no" />
               </Picker>
             </View>
+            <Spacer />
 
             <Text style={styles.questionsText}>
               4. Qual a sua cor de cabelo natural?
@@ -103,7 +100,6 @@ class Survey extends React.Component {
             <View style={styles.picker}>
               <Picker
                 selectedValue={this.state.fourthQuestion}
-                itemStyle={{fontFamily: 'Roboto', fontSize: 13}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.setState({fourthQuestion: itemValue})
                 }>
@@ -115,6 +111,7 @@ class Survey extends React.Component {
                 <Picker.Item label="Outra cor" value="outra cor" />
               </Picker>
             </View>
+            <Spacer />
 
             <Text style={styles.questionsText}>
               5. Quantas vezes lava o cabelo por semana?
@@ -123,7 +120,6 @@ class Survey extends React.Component {
             <View style={styles.picker}>
               <Picker
                 selectedValue={this.state.fifthQuestion}
-                itemStyle={{fontFamily: 'Roboto', fontSize: 13}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.setState({fifthQuestion: itemValue})
                 }>
@@ -133,13 +129,13 @@ class Survey extends React.Component {
                 <Picker.Item label="Todos os dias" value="everyday" />
               </Picker>
             </View>
+            <Spacer />
 
             <Text style={styles.questionsText}>6. Onde vive?</Text>
 
             <View style={styles.picker}>
               <Picker
                 selectedValue={this.state.sixthQuestion}
-                itemStyle={{fontFamily: 'Roboto', fontSize: 13}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.setState({sixthQuestion: itemValue})
                 }>
@@ -148,6 +144,7 @@ class Survey extends React.Component {
                 <Picker.Item label="Campo" value="campo" />
               </Picker>
             </View>
+            <Spacer />
 
             <Text style={styles.questionsText}>
               7. Usa ferramentas de calor?
@@ -156,7 +153,6 @@ class Survey extends React.Component {
             <View style={styles.picker}>
               <Picker
                 selectedValue={this.state.seventhQuestion}
-                itemStyle={{fontFamily: 'Roboto', fontSize: 13}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.setState({seventhQuestion: itemValue})
                 }>
@@ -164,13 +160,13 @@ class Survey extends React.Component {
                 <Picker.Item label="Não" value="no" />
               </Picker>
             </View>
+            <Spacer />
 
             <Text style={styles.questionsText}>8. Usa produtos térmicos?</Text>
 
             <View style={styles.picker}>
               <Picker
                 selectedValue={this.state.eighthQuestion}
-                itemStyle={{fontFamily: 'Roboto', fontSize: 13}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.setState({eighthQuestion: itemValue})
                 }>
@@ -178,6 +174,7 @@ class Survey extends React.Component {
                 <Picker.Item label="Não" value="no" />
               </Picker>
             </View>
+            <Spacer />
 
             <Text style={styles.questionsText}>
               9. Como gostava que o seu cabelo fosse?
@@ -186,7 +183,6 @@ class Survey extends React.Component {
             <View style={styles.picker}>
               <Picker
                 selectedValue={this.state.ninethQuestion}
-                itemStyle={{fontFamily: 'Roboto', fontSize: 13}}
                 onValueChange={(itemValue, itemIndex) =>
                   this.setState({ninethQuestion: itemValue})
                 }>
@@ -237,7 +233,7 @@ const styles = StyleSheet.create({
     //backgroundColor: 'pink',
     alignContent: 'flex-start',
     // alignItems:'center',
-    width: '80%',
+    width: '100%',
   },
   backgroundImage: {
     //flex: 1,

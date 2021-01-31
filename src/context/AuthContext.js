@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import createDataContext from './createDataContext';
-//import trackerApi from '../api/tracker';
 import ServerApi from '../api/ServerCapelliPro';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {navigate} from '../navigationRef';
@@ -48,11 +47,11 @@ const signup = (dispatch) => async ({name, email, password}) => {
   try {
     console.log('signup');
     const response = await ServerApi.post('/api/Auth/register', {name, email, password});
-    await AsyncStorage.setItem('token', response.data.token);
+   /*  await AsyncStorage.setItem('token', response.data.token);
     console.log('async');
     dispatch({type: 'signup', payload: response.data.token});
     console.log('dispatch');
-
+ */
     navigate('Survey');
   } catch (err) {
     console.log(err);
