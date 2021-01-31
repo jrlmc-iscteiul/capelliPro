@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, {useState, useContext} from 'react';
 import {
   SafeAreaView,
@@ -9,7 +8,7 @@ import {
 } from 'react-native';
 import {Text, Input} from 'react-native-elements';
 import {Context as AuthContext} from '../context/AuthContext';
-import AuthForm from '../components/AuthForm';
+import AuthFormRegister from '../components/AuthFormRegister';
 import {NavigationEvents} from 'react-navigation';
 import NavLink from '../components/NavLink';
 import Spacer from '../components/Spacer';
@@ -27,7 +26,7 @@ import {
 const RegisterFrame = ({navigation}) => {
   const {state, signup, clearErrorMessage} = useContext(AuthContext);
 
-  console.log(state);
+  console.log('state: ' + state);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.view}>
@@ -41,21 +40,9 @@ const RegisterFrame = ({navigation}) => {
 
         <Spacer />
 
-        <Input
-          style={styles.inputText}
-          label="Nome"
-          placeholder="Introduza o seu nome completo"
-        />
-
-        <Input
-          style={styles.inputText}
-          label="Password"
-          placeholder="Confirme a sua password"
-        />
-
         <NavigationEvents onWillFocus={clearErrorMessage} />
 
-        <AuthForm
+        <AuthFormRegister
           errorMessage={state.errorMessage}
           submitButtonText="Registar"
           onSubmit={signup}
@@ -113,6 +100,5 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
 });
-
 
 export default RegisterFrame;

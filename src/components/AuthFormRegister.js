@@ -2,21 +2,34 @@ import React, {useState} from 'react';
 import {StyleSheet} from 'react-native';
 import {Text, Button, Input} from 'react-native-elements';
 import {View} from 'react-native';
-import Spacer from './Spacer';
 
-const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
-  const [username, setUsername] = useState('');
+const AuthFormRegister = ({
+  headerText,
+  errorMessage,
+  onSubmit,
+  submitButtonText,
+}) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
     <>
-      <Spacer />
+      <Input
+        style={styles.inputText}
+        label="Nome"
+        value={name}
+        onChangeText={setName}
+        autoCapitalize="none"
+        autoCorrect={false}
+        placeholder="Introduza o seu nome completo"
+      />
 
       <Input
         style={styles.inputText}
         label="Email"
-        value={username}
-        onChangeText={setUsername}
+        value={email}
+        onChangeText={setEmail}
         autoCapitalize="none"
         autoCorrect={false}
         placeholder="Introduza o seu email"
@@ -33,12 +46,17 @@ const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
         placeholder="Introduza a sua password"
       />
 
+      <Input
+        style={styles.inputText}
+        label="Password"
+        placeholder="Confirme a sua password"
+      />
+
       <View style={styles.buttonContainer}>
         <Button
-          // eslint-disable-next-line react-native/no-inline-styles
           buttonStyle={{backgroundColor: '#5A5757'}}
           title={submitButtonText}
-          onPress={() => onSubmit({username, password})}
+          onPress={() => onSubmit({name, email, password})}
         />
       </View>
 
@@ -70,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AuthForm;
+export default AuthFormRegister;
