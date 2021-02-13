@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import createDataContext from './createDataContext';
+//import trackerApi from '../api/tracker';
 import ServerApi from '../api/ServerCapelliPro';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {navigate} from '../navigationRef';
@@ -47,10 +48,10 @@ const signup = (dispatch) => async ({name, email, password}) => {
   try {
     console.log('signup');
     const response = await ServerApi.post('/api/Auth/register', {name, email, password});
-    await AsyncStorage.setItem('token', response.data.token);
+    /* await AsyncStorage.setItem('token', response.data.token);
     console.log('async');
     dispatch({type: 'signup', payload: response.data.token});
-    console.log('dispatch');
+    console.log('dispatch'); */
 
     navigate('Survey');
   } catch (err) {
@@ -81,16 +82,23 @@ const tryLocalSignin = (dispatch) => async () => {
 
 const sendSurvey = (dispatch) => async ({age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair}) => {
   try {
-     console.log('sendSurvey');
-      const response = await ServerApi.post('/api/Auth/survey', {age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair});
-      navigate('Perfil');
-  } catch (error) {
-    
+    console.log('sendSurvey');
+    const response = await ServerApi.post('/api/Survey/survey', {age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair});
+    console.log('dispatch');
+
+    navigate('Perfil');
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong with survey',
+    });
   }
-}
+};
 
 export const {Provider, Context} = createDataContext(
   authReducer,
-  {signin, signup, signout, clearErrorMessage, tryLocalSignin},
+  {signin, signup, signout, clearErrorMessage, tryLocalSignin, sendSurvey},
   {token: null, errorMessage: ''},
 );
+
