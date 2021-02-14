@@ -28,14 +28,19 @@ const signin = (dispatch) => async ({username, password}) => {
   try {
     console.log('signin');
 
-    const response = await ServerApi.post('/api/Auth/login', {username, password});
+    const response = await ServerApi.post('/api/Auth/login', {
+      username,
+      password,
+    });
 
     console.log('response: ' + response.data);
     console.log('response: ' + response.data.token);
 
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({type: 'signin', payload: response.data.token});
-    navigate('mainFlow');
+
+    //navigate('mainFlow');
+    navigate('Survey');
   } catch (err) {
     dispatch({
       type: 'add_error',
@@ -47,13 +52,19 @@ const signin = (dispatch) => async ({username, password}) => {
 const signup = (dispatch) => async ({name, email, password}) => {
   try {
     console.log('signup');
-    const response = await ServerApi.post('/api/Auth/register', {name, email, password});
+    const response = await ServerApi.post('/api/Auth/register', {
+      name,
+      email,
+      password,
+    });
+
     /* await AsyncStorage.setItem('token', response.data.token);
     console.log('async');
     dispatch({type: 'signup', payload: response.data.token});
     console.log('dispatch'); */
 
-    navigate('Survey');
+    //navigate('Survey');
+    navigate('Signin');
   } catch (err) {
     console.log(err);
     console.log('catch:');
@@ -80,11 +91,37 @@ const tryLocalSignin = (dispatch) => async () => {
   }
 };
 
-const sendSurvey = (dispatch) => async ({age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair}) => {
+const sendSurvey = (dispatch) => async ({
+  tokenUser,
+  age,
+  hairType,
+  hairColour,
+  hasColouredHair,
+  numberWashes,
+  livingPlace,
+  useHeatTools,
+  useThermalProducts,
+  desiredHair,
+}) => {
   try {
     console.log('sendSurvey');
-    const response = await ServerApi.post('/api/Survey/survey', {age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair});
-    console.log('dispatch');
+    //const tokenUser = await AsyncStorage.getItem('token');
+    const tokenUser = 'etin12';
+    console.log(tokenUser + ' ' + age + ' ' + hairType + ' ' + hairColour + ' ' + hasColouredHair + ' ' + numberWashes + ' ' + livingPlace + ' ' + useHeatTools + ' ' + useThermalProducts + ' ' + desiredHair,);
+
+    const response = await ServerApi.post('/api/Survey/survey', {
+      tokenUser,
+      age,
+      hairType,
+      hairColour,
+      hasColouredHair,
+      numberWashes,
+      livingPlace,
+      useHeatTools,
+      useThermalProducts,
+      desiredHair,
+    });
+    console.log('done ' + response);
 
     navigate('Perfil');
   } catch (err) {
@@ -101,4 +138,3 @@ export const {Provider, Context} = createDataContext(
   {signin, signup, signout, clearErrorMessage, tryLocalSignin, sendSurvey},
   {token: null, errorMessage: ''},
 );
-

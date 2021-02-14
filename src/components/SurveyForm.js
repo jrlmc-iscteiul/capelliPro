@@ -6,15 +6,15 @@ import Spacer from './Spacer';
 import {Picker} from '@react-native-picker/picker';
 
 const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
-  const [age, setAge] = useState('');
-  const [hairType, setHairType] = useState('');
-  const [hairColour, setHairColour] = useState('');
-  const [hasColouredHair, setHasColouredHair] = useState('');
-  const [numberWashes, setNumberWashes] = useState('');
-  const [livingPlace, setLivingPlace] = useState('');
-  const [useHeatTools, setUseHeatTools] = useState('');
-  const [useThermalProducts, setUseThermalProducts] = useState('');
-  const [desiredHair, setDesiredHair] = useState('');
+  const [age, setAge] = useState('under18');
+  const [hairType, setHairType] = useState('liso');
+  const [hairColour, setHairColour] = useState('preto');
+  const [hasColouredHair, setHasColouredHair] = useState('true');
+  const [numberWashes, setNumberWashes] = useState('1x');
+  const [livingPlace, setLivingPlace] = useState('centroUrbano');
+  const [useHeatTools, setUseHeatTools] = useState('true');
+  const [useThermalProducts, setUseThermalProducts] = useState('true');
+  const [desiredHair, setDesiredHair] = useState('longo');
 
   return (
     <>
@@ -34,7 +34,7 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
         </Picker>
         <Text>{age}</Text>
       </View>
-      
+
       <Spacer />
       <Text style={styles.questionsText}>2. Qual é o seu tipo de cabelo?</Text>
       <View style={styles.picker}>
@@ -72,7 +72,7 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="Loiro" value="loiro" />
           <Picker.Item label="Ruivo" value="ruivo" />
           <Picker.Item label="Grisalho" value="grisalho" />
-          <Picker.Item label="Outra cor" value="outra cor" />
+          <Picker.Item label="Outra cor" value="outraCor" />
         </Picker>
         <Text>{hairColour}</Text>
       </View>
