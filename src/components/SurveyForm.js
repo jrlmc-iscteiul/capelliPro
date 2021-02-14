@@ -32,7 +32,6 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="56-65 anos" value="56-65" />
           <Picker.Item label="Acima de 65 anos" value="over65" />
         </Picker>
-        <Text>{age}</Text>
       </View>
 
       <Spacer />
@@ -46,8 +45,8 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="Encaracolado" value="encaracolado" />
           <Picker.Item label="Frisado" value="frisado" />
         </Picker>
-        <Text>{hairType}</Text>
       </View>
+
       <Spacer />
       <Text style={styles.questionsText}>3. Tem cabelo pintado?</Text>
       <View style={styles.picker}>
@@ -57,8 +56,8 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="Sim" value="true" />
           <Picker.Item label="Não" value="false" />
         </Picker>
-        <Text>{hasColouredHair}</Text>
       </View>
+
       <Spacer />
       <Text style={styles.questionsText}>
         4. Qual a sua cor de cabelo natural?
@@ -74,8 +73,8 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="Grisalho" value="grisalho" />
           <Picker.Item label="Outra cor" value="outraCor" />
         </Picker>
-        <Text>{hairColour}</Text>
       </View>
+
       <Spacer />
       <Text style={styles.questionsText}>
         5. Quantas vezes lava o cabelo por semana?
@@ -89,8 +88,8 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="Dia sim dia não" value="diaSimDiaNao" />
           <Picker.Item label="Todos os dias" value="everyday" />
         </Picker>
-        <Text>{numberWashes}</Text>
       </View>
+
       <Spacer />
       <Text style={styles.questionsText}>6. Onde vive?</Text>
       <View style={styles.picker}>
@@ -102,7 +101,7 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="Campo" value="campo" />
         </Picker>
       </View>
-      <Text>{livingPlace}</Text>
+
       <Spacer />
       <Text style={styles.questionsText}>7. Usa ferramentas de calor?</Text>
       <View style={styles.picker}>
@@ -112,8 +111,8 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="Sim" value="true" />
           <Picker.Item label="Não" value="false" />
         </Picker>
-        <Text>{useHeatTools}</Text>
       </View>
+
       <Spacer />
       <Text style={styles.questionsText}>8. Usa produtos térmicos?</Text>
       <View style={styles.picker}>
@@ -123,9 +122,9 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="Sim" value="true" />
           <Picker.Item label="Não" value="false" />
         </Picker>
-        <Text>{useThermalProducts}</Text>
       </View>
       <Spacer />
+
       <Text style={styles.questionsText}>
         9. Como gostava que o seu cabelo fosse?
       </Text>
@@ -140,9 +139,9 @@ const SurveyForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
           <Picker.Item label="Mais denso" value="denso" />
           <Picker.Item label="Mais volume" value="volume" />
         </Picker>
-        <Text>{desiredHair}</Text>
       </View>
       <Spacer />
+
       <Button
         buttonStyle={{backgroundColor: '#5A5757'}}
         title={submitButtonText}

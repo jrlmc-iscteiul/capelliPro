@@ -4,6 +4,7 @@ import createDataContext from './createDataContext';
 import ServerApi from '../api/ServerCapelliPro';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {navigate} from '../navigationRef';
+import axios from 'axios';
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -33,19 +34,22 @@ const signin = (dispatch) => async ({username, password}) => {
       password,
     });
 
-    console.log('response: ' + response.data);
     console.log('response: ' + response.data.token);
 
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({type: 'signin', payload: response.data.token});
-
-    //navigate('mainFlow');
-    navigate('Survey');
   } catch (err) {
     dispatch({
       type: 'add_error',
       payload: 'Something went wrong with sign in',
     });
+  }
+
+  try {
+    const HasValidSurvey = await ServerApi.get('/api/Survey/HasValidSurvey');
+    navigate('mainFlow');
+  } catch (error) {
+    navigate('Survey');
   }
 };
 
@@ -57,14 +61,8 @@ const signup = (dispatch) => async ({name, email, password}) => {
       email,
       password,
     });
-
-    /* await AsyncStorage.setItem('token', response.data.token);
-    console.log('async');
-    dispatch({type: 'signup', payload: response.data.token});
-    console.log('dispatch'); */
-
-    //navigate('Survey');
     navigate('Signin');
+
   } catch (err) {
     console.log(err);
     console.log('catch:');
@@ -92,7 +90,6 @@ const tryLocalSignin = (dispatch) => async () => {
 };
 
 const sendSurvey = (dispatch) => async ({
-  tokenUser,
   age,
   hairType,
   hairColour,
@@ -105,12 +102,8 @@ const sendSurvey = (dispatch) => async ({
 }) => {
   try {
     console.log('sendSurvey');
-    //const tokenUser = await AsyncStorage.getItem('token');
-    const tokenUser = 'etin12';
-    console.log(tokenUser + ' ' + age + ' ' + hairType + ' ' + hairColour + ' ' + hasColouredHair + ' ' + numberWashes + ' ' + livingPlace + ' ' + useHeatTools + ' ' + useThermalProducts + ' ' + desiredHair,);
 
     const response = await ServerApi.post('/api/Survey/survey', {
-      tokenUser,
       age,
       hairType,
       hairColour,
