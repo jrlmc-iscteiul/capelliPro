@@ -1,19 +1,21 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
-  View,
   Text,
-  StatusBar,
   Image,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
 
 import Space from '../components/space';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Headerr({navigation}) {
+  const name = AsyncStorage.getItem('nameUser');
+  console.log(name);
+  const [nameUser, setNameUser] = useState('Username');
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -29,10 +31,10 @@ export default function Headerr({navigation}) {
         <Space />
         <Image
           style={styles.viewImageUser}
-          source={require('../Imagens/ma.png')}
+          source={require('../Imagens/default-user-image.png')}
         />
         <Space />
-        <Text style={styles.textUser}>Maria Antónia</Text>
+        <Text style={styles.textUser}>{nameUser}</Text>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -52,7 +54,7 @@ const styles = StyleSheet.create({
     width: 74,
     height: 74,
     alignSelf: 'center',
-    borderRadius: 30,
+    borderRadius: 40,
   },
   textUser: {
     fontWeight: 'normal',

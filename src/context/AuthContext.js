@@ -56,6 +56,8 @@ const signin = (dispatch) => async ({username, password}) => {
 const signup = (dispatch) => async ({name, email, password}) => {
   try {
     console.log('signup');
+    await AsyncStorage.setItem('nameUser', name);
+
     const response = await ServerApi.post('/api/Auth/register', {
       name,
       email,
@@ -89,31 +91,11 @@ const tryLocalSignin = (dispatch) => async () => {
   }
 };
 
-const sendSurvey = (dispatch) => async ({
-  age,
-  hairType,
-  hairColour,
-  hasColouredHair,
-  numberWashes,
-  livingPlace,
-  useHeatTools,
-  useThermalProducts,
-  desiredHair,
-}) => {
+const sendSurvey = (dispatch) => async ({age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair}) => {
   try {
     console.log('sendSurvey');
 
-    const response = await ServerApi.post('/api/Survey/survey', {
-      age,
-      hairType,
-      hairColour,
-      hasColouredHair,
-      numberWashes,
-      livingPlace,
-      useHeatTools,
-      useThermalProducts,
-      desiredHair,
-    });
+    const response = await ServerApi.post('/api/Survey/survey', {age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair});
     console.log('done ' + response);
 
     navigate('Perfil');
@@ -125,6 +107,19 @@ const sendSurvey = (dispatch) => async ({
     });
   }
 };
+
+const getUsername = (dispatch) => async({}) => {
+  try {
+    console.log('getUsername');
+
+    const response = await ServerApi.get('/api/Auth/GetUserName');
+    return response;
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 export const {Provider, Context} = createDataContext(
   authReducer,
