@@ -19,8 +19,8 @@ const Dashboard = ({navigation}) => {
   const getUsername = async () => {
     try {
       const response = await ServerApi.get('/api/Auth/GetUserName');
-      setName(response.data.name);
-     // await AsyncStorage.setItem('username', response.data.name);
+      await AsyncStorage.setItem('username', response.data.name);
+      setName(await AsyncStorage.getItem('username'));
     } catch (error) {
       console.log(error);
       setName('Utilizador');

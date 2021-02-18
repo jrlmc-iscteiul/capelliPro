@@ -1,35 +1,17 @@
 import React, {useState} from 'react';
 import 'react-native-gesture-handler';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Image,
-} from 'react-native';
-
-import {
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {SafeAreaView, StyleSheet, Text, Image} from 'react-native';
 
 import Headerr from '../components/header';
 import Space from '../components/space';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import ServerApi from '../api/ServerCapelliPro';
 
 const Forecasts = ({navigation}) => {
   const [name, setName] = useState('Username');
 
   const getUsername = async () => {
     try {
-      const response = await ServerApi.get('/api/Auth/GetUserName');
-      setName(response.data.name);
-      await AsyncStorage.setItem('username', response.data.name);
+      setName(await AsyncStorage.getItem('username'));
     } catch (error) {
       console.log(error);
       setName('Utilizador');
