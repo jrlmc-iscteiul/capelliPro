@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import 'react-native-gesture-handler';
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,65 +10,69 @@ import {
 
 import Headerr from '../components/header';
 import Space from '../components/space';
+import ServerApi from '../api/ServerCapelliPro';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default class Dashboard extends React.Component {
-  //var nameUser = AsyncStorage.getItem('nameUser'); 
+const Dashboard = ({navigation}) => {
+  const [name, setName] = useState('Username');
 
-  render() {
-    return (
-      <SafeAreaView style={styles.container}>
-        <Headerr navigation={this.props.navigation} />
-        <Space />
-        <Text style={styles.textOS}>O seu último diagnóstico foi em:</Text>
-        <Space />
-        <Text style={styles.textData}>5 de Junho de 2020</Text>
-        <Space />
-        <Text style={styles.textER}>E o resultado foi:</Text>
-        <Space />
-        <Text style={styles.textResult}>Piolhos</Text>
-        <Space />
+  const getUsername = async () => {
+    try {
+      const response = await ServerApi.get('/api/Auth/GetUserName');
+      setName(response.data.name);
+     // await AsyncStorage.setItem('username', response.data.name);
+    } catch (error) {
+      console.log(error);
+      setName('Utilizador');
+    }
+  };
+
+  getUsername();
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Headerr navigation={navigation} name={name}/>
+      <Space />
+      <Text style={styles.textOS}>O seu último diagnóstico foi em:</Text>
+      <Space />
+      <Text style={styles.textData}>5 de Junho de 2020</Text>
+      <Space />
+      <Text style={styles.textER}>E o resultado foi:</Text>
+      <Space />
+      <Text style={styles.textResult}>Piolhos</Text>
+      <Space />
+      <TouchableWithoutFeedback
+        onPress={() => navigation.navigate('Diagnostico')}>
+        <View style={styles.buttonTop}>
+          <Image style={styles.img} source={require('../Imagens/Img3.png')} />
+          <Space />
+          <Text style={styles.textButtons}>Faça o seu diagnóstico capilar</Text>
+        </View>
+      </TouchableWithoutFeedback>
+      <Space />
+      <View style={styles.containerBot}>
         <TouchableWithoutFeedback
-          onPress={() => this.props.navigation.navigate('Diagnostico')}>
-          <View style={styles.buttonTop}>
-            <Image style={styles.img} source={require('../Imagens/Img3.png')} />
+          onPress={() => navigation.navigate('Estatisticas')}>
+          <View style={styles.buttonLeft}>
+            <Image style={styles.img} source={require('../Imagens/Img4.png')} />
             <Space />
-            <Text style={styles.textButtons}>
-              Faça o seu diagnóstico capilar
-            </Text>
+            <Text style={styles.textButtons}>Veja as suas estatísticas</Text>
           </View>
         </TouchableWithoutFeedback>
-        <Space />
-        <View style={styles.containerBot}>
-          <TouchableWithoutFeedback
-            onPress={() => this.props.navigation.navigate('Estatisticas')}>
-            <View style={styles.buttonLeft}>
-              <Image
-                style={styles.img}
-                source={require('../Imagens/Img4.png')}
-              />
-              <Space />
-              <Text style={styles.textButtons}>Veja as suas estatísticas</Text>
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback
-            onPress={() => this.props.navigation.navigate('Previsoes')}>
-            <View style={styles.buttonRight}>
-              <Image
-                style={styles.img}
-                source={require('../Imagens/Img6.png')}
-              />
-              <Space />
-              <Text style={styles.textButtons}>Veja as suas previsões</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
+        <TouchableWithoutFeedback
+          onPress={() => navigation.navigate('Previsoes')}>
+          <View style={styles.buttonRight}>
+            <Image style={styles.img} source={require('../Imagens/Img6.png')} />
+            <Space />
+            <Text style={styles.textButtons}>Veja as suas previsões</Text>
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
 
-        <Space />
-      </SafeAreaView>
-    );
-  }
-}
+      <Space />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -148,3 +151,5 @@ const styles = StyleSheet.create({
     borderColor: 'black',
   },
 });
+
+export default Dashboard;

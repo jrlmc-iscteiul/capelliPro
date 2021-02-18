@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'react-native-gesture-handler';
 import {
   SafeAreaView,
@@ -19,6 +19,46 @@ import {
 
 import Headerr from '../components/header';
 import Space from '../components/space';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import ServerApi from '../api/ServerCapelliPro';
+
+const Forecasts = ({navigation}) => {
+  const [name, setName] = useState('Username');
+
+  const getUsername = async () => {
+    try {
+      const response = await ServerApi.get('/api/Auth/GetUserName');
+      setName(response.data.name);
+      await AsyncStorage.setItem('username', response.data.name);
+    } catch (error) {
+      console.log(error);
+      setName('Utilizador');
+    }
+  };
+
+  getUsername();
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Headerr navigation={navigation} name={name} />
+      <Text style={styles.textPrevisoes}>Previsões</Text>
+      <Space />
+      <Text style={styles.textDescricao}>
+        - Deverá ter cuidado com os piolhos e usar durante todo o ano um produto
+        para prevenir piolhos, dada a alta incidência. - A caspa irá, muito
+        provavelmente, reincidir no Inverno.
+      </Text>
+      <Space />
+      <Image
+        style={styles.imgGraph}
+        source={require('../Imagens/graphForecasts.png')}
+      />
+      <Space />
+      <Space />
+      <Space />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -51,26 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Forecasts({navigation}) {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Headerr navigation={navigation} />
-
-      <Text style={styles.textPrevisoes}>Previsões</Text>
-      <Space />
-      <Text style={styles.textDescricao}>
-        - Deverá ter cuidado com os piolhos e usar durante todo o ano um produto
-        para prevenir piolhos, dada a alta incidência. - A caspa irá, muito
-        provavelmente, reincidir no Inverno.
-      </Text>
-      <Space />
-      <Image
-        style={styles.imgGraph}
-        source={require('../Imagens/graphForecasts.png')}
-      />
-      <Space />
-      <Space />
-      <Space />
-    </SafeAreaView>
-  );
-}
+export default Forecasts;

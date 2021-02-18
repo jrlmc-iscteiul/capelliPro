@@ -9,13 +9,8 @@ import {
 } from 'react-native';
 
 import Space from '../components/space';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function Headerr({navigation}) {
-  const name = AsyncStorage.getItem('nameUser');
-  console.log(name);
-  const [nameUser, setNameUser] = useState('Username');
-
+const Headerr = ({navigation, name}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -34,17 +29,15 @@ export default function Headerr({navigation}) {
           source={require('../Imagens/default-user-image.png')}
         />
         <Space />
-        <Text style={styles.textUser}>{nameUser}</Text>
+        <Text style={styles.textUser}>{name}</Text>
       </ImageBackground>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //alignItems: 'center',
-    //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     justifyContent: 'flex-start',
     flexDirection: 'column',
     width: '100%',
@@ -75,3 +68,5 @@ const styles = StyleSheet.create({
     left: 10,
   },
 });
+
+export default Headerr;

@@ -17,30 +17,19 @@ class GetStartedFrame extends React.Component {
       <SafeAreaView style={styles.container}>
         <Image style={styles.image} source={require('../Imagens/cp.png')} />
 
-        <View
-          style={{
-            width: '100%',
-            height: 40,
-          }}></View>
-
         <Image
           style={styles.image2}
           source={require('../Imagens/imgGetStarted.png')}
         />
 
-        <Spacer />
-        
         <View style={styles.view}>
-          <Text numberOfLines={4} ellipsizeMode="tail">
+          <Text numberOfLines={4} ellipsizeMode="tail" text-align="center">
             A CapelliPro é uma forma de tratares do teu cabelo no conforto da
             tua casa, vai revolucionar os teus hábitos de tratamento!
           </Text>
         </View>
 
-        <Spacer />
-
         <Button
-          style={styles.button}
           color="#5A5757"
           title="Começar com CapelliPro"
           onPress={() => this.props.navigation.navigate('Signup')}
@@ -69,27 +58,24 @@ const styles = StyleSheet.create({
     width: 83,
     height: 59,
     //position: 'absolute',
+    bottom: 60,
   },
   image2: {
     width: 188.9,
     height: 189.47,
+    bottom: 30,
     //position: 'absolute',
   },
   view: {
-    alignItems: 'center',
     width: 218,
     height: 72,
+    bottom: 15,
   },
   text: {
     fontSize: 13,
     textAlign: 'center',
     alignSelf: 'center',
     textAlignVertical: 'center',
-  },
-  button: {
-    width: 273,
-    height: 54,
-    borderRadius: 4,
   },
 });
 
