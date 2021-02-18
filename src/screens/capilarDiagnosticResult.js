@@ -1,22 +1,6 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Image,
-} from 'react-native';
-
-import {
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
+import {SafeAreaView, StyleSheet, View, Text} from 'react-native';
 import Headerr from '../components/header';
 import Space from '../components/space';
 

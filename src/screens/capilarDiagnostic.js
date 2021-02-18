@@ -1,25 +1,50 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'react-native-gesture-handler';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Image,
-  Button,
-} from 'react-native';
-
-import {
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
+import {SafeAreaView, StyleSheet, Text, Image, Button} from 'react-native';
 import Headerr from '../components/header';
 import Space from '../components/space';
+import ServerApi from '../api/ServerCapelliPro';
+
+const capilarDiagnostic = ({navigation}) => {
+  const [name, setName] = useState('Username');
+
+  const getUsername = async () => {
+    try {
+      const response = await ServerApi.get('/api/Auth/GetUserName');
+      setName(response.data.name);
+    } catch (error) {
+      console.log(error);
+      setName('Utilizador');
+    }
+  };
+
+  getUsername();
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Headerr navigation={navigation} name={name} />
+
+      <Image style={styles.img} source={require('../Imagens/Img5.png')} />
+      <Space />
+      <Space />
+
+      <Button
+        style={styles.buttonDC}
+        color="#5A5757"
+        title="Diagnóstico Capilar"
+        onPress={() => navigation.navigate('Resultado')}
+      />
+      <Space />
+      <Text style={styles.textPF}>Por favor, ligue o seu analisador.</Text>
+      <Space />
+      <Space />
+      <Space />
+      <Space />
+      <Space />
+      <Space />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -48,29 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function capilarDiagnostic({navigation}) {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Headerr navigation={navigation} />
-
-      <Image style={styles.img} source={require('../Imagens/Img5.png')} />
-      <Space />
-      <Space />
-
-      <Button
-        style={styles.buttonDC}
-        color="#5A5757"
-        title="Diagnóstico Capilar"
-        onPress={() => navigation.navigate('Resultado')}
-      />
-      <Space />
-      <Text style={styles.textPF}>Por favor, ligue o seu analisador.</Text>
-      <Space />
-      <Space />
-      <Space />
-      <Space />
-      <Space />
-      <Space />
-    </SafeAreaView>
-  );
-}
+export default capilarDiagnostic;

@@ -1,24 +1,40 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'react-native-gesture-handler';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-  Image,
-} from 'react-native';
-
-import {
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
+import {SafeAreaView, StyleSheet, Text, Image} from 'react-native';
 import Headerr from '../components/header';
 import Space from '../components/space';
+import ServerApi from '../api/ServerCapelliPro';
+
+const Statistics = ({navigation}) => {
+  const [name, setName] = useState('Username');
+
+  const getUsername = async () => {
+    try {
+      const response = await ServerApi.get('/api/Auth/GetUserName');
+      setName(response.data.name);
+    } catch (error) {
+      console.log(error);
+      setName('Utilizador');
+    }
+  };
+
+  getUsername();
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Headerr navigation={navigation} name={name} />
+
+      <Text style={styles.textStats}>Estatísticas</Text>
+      <Space />
+      <Text style={styles.textNum}>Número de diagnósticos num ano: 8</Text>
+      <Space />
+      <Image style={styles.imgGraph} source={require('../Imagens/graph.png')} />
+      <Space />
+      <Space />
+      <Space />
+    </SafeAreaView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -51,19 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Statistics({navigation}) {
-  return (
-    <SafeAreaView style={styles.container}>
-      <Headerr navigation={navigation} />
-
-      <Text style={styles.textStats}>Estatísticas</Text>
-      <Space />
-      <Text style={styles.textNum}>Número de diagnósticos num ano: 8</Text>
-      <Space />
-      <Image style={styles.imgGraph} source={require('../Imagens/graph.png')} />
-      <Space />
-      <Space />
-      <Space />
-    </SafeAreaView>
-  );
-}
+export default Statistics;

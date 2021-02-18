@@ -4,6 +4,7 @@ import createDataContext from './createDataContext';
 import ServerApi from '../api/ServerCapelliPro';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {navigate} from '../navigationRef';
+import axios from 'axios';
 
 const authReducer = (state, action) => {
   switch (action.type) {
@@ -28,32 +29,42 @@ const signin = (dispatch) => async ({username, password}) => {
   try {
     console.log('signin');
 
-    const response = await ServerApi.post('/api/Auth/login', {username, password});
+    const response = await ServerApi.post('/api/Auth/login', {
+      username,
+      password,
+    });
 
-    console.log('response: ' + response.data);
     console.log('response: ' + response.data.token);
 
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({type: 'signin', payload: response.data.token});
-    navigate('mainFlow');
   } catch (err) {
     dispatch({
       type: 'add_error',
       payload: 'Something went wrong with sign in',
     });
   }
+
+  try {
+    const HasValidSurvey = await ServerApi.get('/api/Survey/HasValidSurvey');
+    navigate('mainFlow');
+  } catch (error) {
+    navigate('Survey');
+  }
 };
 
 const signup = (dispatch) => async ({name, email, password}) => {
   try {
     console.log('signup');
-    const response = await ServerApi.post('/api/Auth/register', {name, email, password});
-    await AsyncStorage.setItem('token', response.data.token);
-    console.log('async');
-    dispatch({type: 'signup', payload: response.data.token});
-    console.log('dispatch');
+    await AsyncStorage.setItem('nameUser', name);
 
-    navigate('Survey');
+    const response = await ServerApi.post('/api/Auth/register', {
+      name,
+      email,
+      password,
+    });
+    navigate('Signin');
+
   } catch (err) {
     console.log(err);
     console.log('catch:');
@@ -80,8 +91,38 @@ const tryLocalSignin = (dispatch) => async () => {
   }
 };
 
+const sendSurvey = (dispatch) => async ({age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair}) => {
+  try {
+    console.log('sendSurvey');
+
+    const response = await ServerApi.post('/api/Survey/survey', {age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair});
+    console.log('done ' + response);
+
+    navigate('Perfil');
+  } catch (err) {
+    console.log(err);
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong with survey',
+    });
+  }
+};
+
+const getUsername = (dispatch) => async({}) => {
+  try {
+    console.log('getUsername');
+
+    const response = await ServerApi.get('/api/Auth/GetUserName');
+    return response;
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 export const {Provider, Context} = createDataContext(
   authReducer,
-  {signin, signup, signout, clearErrorMessage, tryLocalSignin},
+  {signin, signup, signout, clearErrorMessage, tryLocalSignin, sendSurvey},
   {token: null, errorMessage: ''},
 );

@@ -46,6 +46,10 @@ const AuthFormRegister = ({
         placeholder="Introduza a sua password"
       />
 
+      {password.length < 6 ? (
+        <Text>A password deve ter pelo menos 6 caracteres. </Text>
+      ) : null}
+
       <Input
         style={styles.inputText}
         label="Password"

@@ -6,22 +6,12 @@ import {
   StatusBar,
   Platform,
 } from 'react-native';
-import {Text, Input} from 'react-native-elements';
+import {Text} from 'react-native-elements';
 import {Context as AuthContext} from '../context/AuthContext';
 import AuthFormRegister from '../components/AuthFormRegister';
 import {NavigationEvents} from 'react-navigation';
 import NavLink from '../components/NavLink';
 import Spacer from '../components/Spacer';
-
-/*
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-*/
 
 const RegisterFrame = ({navigation}) => {
   const {state, signup, clearErrorMessage} = useContext(AuthContext);
