@@ -1,23 +1,23 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import 'react-native-gesture-handler';
-import {SafeAreaView, StyleSheet, Text, Image, Button} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  Button,
+} from 'react-native';
 import Headerr from '../components/header';
 import Space from '../components/space';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import useUserInfo from '../hooks/useUserInfo';
 
 const capilarDiagnostic = ({navigation}) => {
-  const [name, setName] = useState('Username');
+  const [getUsername, name] = useUserInfo();
 
-  const getUsername = async () => {
-    try {
-      setName(await AsyncStorage.getItem('username'));
-    } catch (error) {
-      console.log(error);
-      setName('Utilizador');
-    }
-  };
-
-  getUsername();
+  useEffect(() => {
+    getUsername();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -25,15 +25,16 @@ const capilarDiagnostic = ({navigation}) => {
 
       <Image style={styles.img} source={require('../Imagens/Img5.png')} />
       <Space />
-      <Space />
+      {/* <Space /> */}
 
-      <Button
-        style={styles.buttonDC}
-        color="#5A5757"
-        title="Diagnóstico Capilar"
-        onPress={() => navigation.navigate('Resultado')}
-      />
-      <Space />
+      <View style={styles.viewButton}>
+        <Button
+          style={styles.buttonDC}
+          color="#5A5757"
+          title="Diagnóstico Capilar"
+          onPress={() => navigation.navigate('Resultado')}
+        />
+      </View>
       <Text style={styles.textPF}>Por favor, ligue o seu analisador.</Text>
       <Space />
       <Space />
@@ -52,6 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexDirection: 'column',
     backgroundColor: '#fff',
+    alignItems: 'center',
   },
   textPF: {
     fontFamily: 'Roboto',
@@ -60,10 +62,19 @@ const styles = StyleSheet.create({
     fontSize: 16,
     alignSelf: 'center',
   },
-  buttonDC: {
-    width: 200,
+  viewButton: {
+    //backgroundColor: 'blue',
+    width: '80%',
     height: 54,
-    borderRadius: 4,
+    borderRadius: 10,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+  },
+  buttonDC: {
+    height: 54,
+    alignItems: 'center',
+    // borderRadius='30',
   },
   img: {
     alignSelf: 'center',
