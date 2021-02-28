@@ -1,23 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import 'react-native-gesture-handler';
 import {SafeAreaView, StyleSheet, Text, Image} from 'react-native';
 import Headerr from '../components/header';
 import Space from '../components/space';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import useUserInfo from '../hooks/useUserInfo';
 
 const Statistics = ({navigation}) => {
-  const [name, setName] = useState('Username');
+  const [getUsername, name] = useUserInfo();
 
-  const getUsername = async () => {
-    try {
-      setName(await AsyncStorage.getItem('username'));
-    } catch (error) {
-      console.log(error);
-      setName('Utilizador');
-    }
-  };
-
-  getUsername();
+  useEffect(() => {
+    getUsername();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>

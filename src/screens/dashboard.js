@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,39 +7,34 @@ import {
   Image,
   TouchableWithoutFeedback,
 } from 'react-native';
-
 import Headerr from '../components/header';
 import Space from '../components/space';
-import ServerApi from '../api/ServerCapelliPro';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import useUserInfo from '../hooks/useUserInfo';
+import useDiagnostic from '../hooks/useDiagnostic';
 
 const Dashboard = ({navigation}) => {
-  const [name, setName] = useState('Username');
+  const [getUsername, name] = useUserInfo();
+  const [getDiagnostic, disease, solution, date] = useDiagnostic();
 
-  const getUsername = async () => {
-    try {
-      const response = await ServerApi.get('/api/Auth/GetUserName');
-      await AsyncStorage.setItem('username', response.data.name);
-      setName(await AsyncStorage.getItem('username'));
-    } catch (error) {
-      console.log(error);
-      setName('Utilizador');
-    }
-  };
-
-  getUsername();
+  useEffect(() => {
+    getUsername();
+    getDiagnostic();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Headerr navigation={navigation} name={name}/>
+      <Headerr navigation={navigation} name={name} />
       <Space />
       <Text style={styles.textOS}>O seu último diagnóstico foi em:</Text>
       <Space />
-      <Text style={styles.textData}>5 de Junho de 2020</Text>
+      <Text style={styles.textData}>
+        {date.toString().substring(0, 10)} às{' '}
+        {date.toString().substring(11, 16)}{' '}
+      </Text>
       <Space />
       <Text style={styles.textER}>E o resultado foi:</Text>
       <Space />
-      <Text style={styles.textResult}>Piolhos</Text>
+      <Text style={styles.textResult}>{disease}</Text>
       <Space />
       <TouchableWithoutFeedback
         onPress={() => navigation.navigate('Diagnostico')}>
@@ -53,7 +48,7 @@ const Dashboard = ({navigation}) => {
       <View style={styles.containerBot}>
         <TouchableWithoutFeedback
           onPress={() => navigation.navigate('Estatisticas')}>
-          <View style={styles.buttonLeft}>
+          <View style={styles.buttonBottom}>
             <Image style={styles.img} source={require('../Imagens/Img4.png')} />
             <Space />
             <Text style={styles.textButtons}>Veja as suas estatísticas</Text>
@@ -61,7 +56,7 @@ const Dashboard = ({navigation}) => {
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
           onPress={() => navigation.navigate('Previsoes')}>
-          <View style={styles.buttonRight}>
+          <View style={styles.buttonBottom}>
             <Image style={styles.img} source={require('../Imagens/Img6.png')} />
             <Space />
             <Text style={styles.textButtons}>Veja as suas previsões</Text>
@@ -125,23 +120,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     backgroundColor: 'white',
     borderColor: 'black',
-    borderWidth: 2,
+    borderWidth: 1,
   },
-  buttonLeft: {
+  buttonBottom: {
     borderRadius: 6,
     paddingHorizontal: 20,
     paddingVertical: 10,
     backgroundColor: 'white',
     borderColor: 'black',
-    borderWidth: 2,
-  },
-  buttonRight: {
-    borderRadius: 6,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderWidth: 2,
+    borderWidth: 1,
   },
   img: {
     width: 150,
