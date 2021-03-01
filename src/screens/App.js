@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
 import 'react-native-gesture-handler';
 
@@ -29,6 +21,10 @@ import LoginFrame from './loginFrame';
 import Survey from './Survey';
 import Settings from './settings';
 import CapilarDiagnosticResult from './capilarDiagnosticResult';
+import ImagePickerScreen from './imagePickerScreen';
+import CameraScreen from './CameraScreen';
+import NetInfoScreen from './NetInfoScreen';
+
 import {Provider as AuthProvider} from '../context/AuthContext';
 import {setNavigator} from '../navigationRef';
 
@@ -42,6 +38,12 @@ const switchNavigator = createSwitchNavigator({
   }), */
   mainFlow: createDrawerNavigator(
     {
+      NetInfo: {
+        screen: NetInfoScreen,
+      },
+      ImagePicker: {
+        screen: ImagePickerScreen,
+      },
       Perfil: {
         screen: Dashboard,
       },
@@ -77,62 +79,3 @@ export default () => {
     </AuthProvider>
   );
 };
-
-/* function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props}>
-
-      <DrawerItem
-        icon={() => (
-          <Icon icon='eye' solid color="blue" size={32} />)}
-        label="Diagnóstico"
-        onPress={() => props.navigation.navigate('Diagnostico')}
-      />
-      <DrawerItem
-        icon={() => (
-          <Icon icon='eye' solid color="blue" size={32} />)}
-        label="Estatísticas"
-        onPress={() => props.navigation.navigate('Estatisticas')}
-      />
-      <DrawerItem
-        icon={() => (
-          <Icon icon='eye' solid color="blue" size={32} />)}
-        label="Previsões"
-        onPress={() => props.navigation.navigate('Previsoes')}
-      />
-      <DrawerItem
-        icon={() => (
-          <Icon icon='eye' solid color="blue" size={32} />)}
-        label="Perfil"
-        onPress={() => props.navigation.navigate('Perfil')}
-      />
-      <DrawerItem
-        icon={() => (
-          <Icon icon='eye' solid color="blue" size={32} />)}
-        label="Configurações"
-        onPress={() => props.navigation.navigate('Settings')}
-      />
-    </DrawerContentScrollView>
-  );
-}
-
-function MyDrawer() {
-  return (
-    <Drawer.Navigator initialRouteName="Registo" drawerContent={props => <CustomDrawerContent {...props} />}>
-      <Drawer.Screen name="Diagnostico" component={CapilarDiagnostic} />
-      <Drawer.Screen name="Estatisticas" component={Statistics} />
-      <Drawer.Screen name="Previsoes" component={Forecasts} />
-      <Drawer.Screen name="Perfil" component={Dashboard} />
-      <Drawer.Screen name="Settings" component={Settings} />
-      <Drawer.Screen name="Resultado" component={CapilarDiagnosticResult} />
-    </Drawer.Navigator>
-  )
-}
-
-const Drawer = () => {
-  return (
-      <NavigationContainer>
-        <MyDrawer />
-      </NavigationContainer>
-  )
-}; */
