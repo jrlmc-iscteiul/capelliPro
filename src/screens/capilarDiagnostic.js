@@ -32,7 +32,8 @@ const capilarDiagnostic = ({navigation}) => {
           style={styles.buttonDC}
           color="#5A5757"
           title="Diagnóstico Capilar"
-          onPress={() => navigation.navigate('Resultado')}
+          //onPress={() => navigation.navigate('Resultado')}
+          onPress={() => navigation.navigate('ImagePicker')}
         />
       </View>
       <Text style={styles.textPF}>Por favor, ligue o seu analisador.</Text>

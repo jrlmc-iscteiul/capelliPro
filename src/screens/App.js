@@ -29,19 +29,31 @@ import LoginFrame from './loginFrame';
 import Survey from './Survey';
 import Settings from './settings';
 import CapilarDiagnosticResult from './capilarDiagnosticResult';
+import ImagePickerScreen from './ImagePickerScreen';
+import CameraScreen from './CameraScreen';
+import NetInfoScreen from './NetInfoScreen';
+
 import {Provider as AuthProvider} from '../context/AuthContext';
 import {setNavigator} from '../navigationRef';
 
 const switchNavigator = createSwitchNavigator({
   ResolveAuth: ResolveAuthScreen,
+
   loginFlow: createStackNavigator({
     getStarted: GetStarted,
     Signup: RegisterFrame,
     Signin: LoginFrame,
     Survey: Survey,
   }),
+
   mainFlow: createDrawerNavigator(
     {
+      NetInfo: {
+        screen: NetInfoScreen,
+      },
+      ImagePicker: {
+        screen: ImagePickerScreen,
+      },
       Perfil: {
         screen: Dashboard,
       },
@@ -59,7 +71,7 @@ const switchNavigator = createSwitchNavigator({
       },
       Resultado: {
         screen: CapilarDiagnosticResult,
-      }
+      },
     },
     {
       contentComponent: CustomDrawerContent,
@@ -80,5 +92,3 @@ export default () => {
     </AuthProvider>
   );
 };
-
-
