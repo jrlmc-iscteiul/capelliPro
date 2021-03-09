@@ -44,7 +44,6 @@ const signin = (dispatch) => async ({username, password}) => {
       payload: 'Something went wrong with sign in',
     });
   }
-
   try {
     const HasValidSurvey = await ServerApi.get('/api/Survey/HasValidSurvey');
     navigate('mainFlow');
@@ -64,7 +63,6 @@ const signup = (dispatch) => async ({name, email, password}) => {
       password,
     });
     navigate('Signin');
-
   } catch (err) {
     console.log(err);
     console.log('catch:');
@@ -91,11 +89,31 @@ const tryLocalSignin = (dispatch) => async () => {
   }
 };
 
-const sendSurvey = (dispatch) => async ({age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair}) => {
+const sendSurvey = (dispatch) => async ({
+  age,
+  hairType,
+  hairColour,
+  hasColouredHair,
+  numberWashes,
+  livingPlace,
+  useHeatTools,
+  useThermalProducts,
+  desiredHair,
+}) => {
   try {
     console.log('sendSurvey');
 
-    const response = await ServerApi.post('/api/Survey/survey', {age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair});
+    const response = await ServerApi.post('/api/Survey/survey', {
+      age,
+      hairType,
+      hairColour,
+      hasColouredHair,
+      numberWashes,
+      livingPlace,
+      useHeatTools,
+      useThermalProducts,
+      desiredHair,
+    });
     console.log('done ' + response);
 
     navigate('Perfil');
@@ -108,7 +126,22 @@ const sendSurvey = (dispatch) => async ({age, hairType, hairColour, hasColouredH
   }
 };
 
-const getUsername = (dispatch) => async({}) => {
+const sendImage = dispatch => {
+  return async ({image}) => {
+    try {
+      console.log('sendImage');
+      const response = await ServerApi.post('/api/', {image}); //mudar
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: 'add_error',
+        payload: 'Something went wrong with survey',
+      });
+    }
+  };
+};
+
+/* const getUsername = (dispatch) => async({}) => {
   try {
     console.log('getUsername');
 
@@ -119,7 +152,7 @@ const getUsername = (dispatch) => async({}) => {
     console.log(error);
   }
 };
-
+ */
 
 export const {Provider, Context} = createDataContext(
   authReducer,
