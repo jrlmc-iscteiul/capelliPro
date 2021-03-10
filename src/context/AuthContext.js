@@ -156,6 +156,6 @@ const sendImage = dispatch => {
 
 export const {Provider, Context} = createDataContext(
   authReducer,
-  {signin, signup, signout, clearErrorMessage, tryLocalSignin, sendSurvey},
+  {signin, signup, signout, clearErrorMessage, tryLocalSignin, sendSurvey, sendImage},
   {token: null, errorMessage: ''},
 );
