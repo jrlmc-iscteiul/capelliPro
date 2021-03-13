@@ -35,14 +35,14 @@ import {Provider as AuthProvider} from '../context/AuthContext';
 import {setNavigator} from '../navigationRef';
 
 const switchNavigator = createSwitchNavigator({
-  ResolveAuth: ResolveAuthScreen,
+  /* ResolveAuth: ResolveAuthScreen,
 
   loginFlow: createStackNavigator({
     getStarted: GetStarted,
     Signup: RegisterFrame,
     Signin: LoginFrame,
     Survey: Survey,
-  }),
+  }), */
 
   mainFlow: createDrawerNavigator(
     {

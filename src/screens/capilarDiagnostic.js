@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import 'react-native-gesture-handler';
 import {
   SafeAreaView,
@@ -11,21 +11,45 @@ import {
 import Headerr from '../components/header';
 import Space from '../components/space';
 import useUserInfo from '../hooks/useUserInfo';
+import * as ImagePicker from 'react-native-image-picker';
+import {Context as AuthContext} from '../context/AuthContext';
+import ImgToBase64 from 'react-native-image-base64';
 
 const capilarDiagnostic = ({navigation}) => {
   const [getUsername, name] = useUserInfo();
+  const {state, sendImage} = useContext(AuthContext);
+  const [photo, setPhoto] = useState(null);
 
   useEffect(() => {
     getUsername();
   }, []);
 
+  const handleChoosePhoto = () => {
+    const options = {
+      noData: true,
+    };
+
+    ImagePicker.launchImageLibrary(options, (response) => {
+      console.log('response', response);
+      if (response.uri) {
+        setPhoto(response);
+        //const base64Value = response.data;
+        const base64Value = ImgToBase64.getBase64String(response.uri);
+        console.log(base64Value);
+        sendImage({base64Value});
+      }
+    });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Headerr navigation={navigation} name={name} />
 
+      {photo && (
+        <Image source={{uri: photo.uri}} style={{width: 300, height: 300}} />
+      )}
       <Image style={styles.img} source={require('../Imagens/Img5.png')} />
       <Space />
-      {/* <Space /> */}
 
       <View style={styles.viewButton}>
         <Button
@@ -33,10 +57,10 @@ const capilarDiagnostic = ({navigation}) => {
           color="#5A5757"
           title="Diagnóstico Capilar"
           //onPress={() => navigation.navigate('Resultado')}
-          onPress={() => navigation.navigate('ImagePicker')}
+          onPress={handleChoosePhoto}
         />
       </View>
-      <Text style={styles.textPF}>Por favor, ligue o seu analisador.</Text>
+      <Text style={styles.textPF}>Selecione uma fotografia.</Text>
       <Space />
       <Space />
       <Space />
