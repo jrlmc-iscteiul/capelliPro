@@ -7,6 +7,7 @@ import {
   Image,
   View,
   Button,
+  TouchableOpacity,
 } from 'react-native';
 import Headerr from '../components/header';
 import Space from '../components/space';
@@ -19,6 +20,7 @@ const capilarDiagnostic = ({navigation}) => {
   const [getUsername, name] = useUserInfo();
   const {state, sendImage} = useContext(AuthContext);
   const [photo, setPhoto] = useState(null);
+  const [nav, changeNav] = useState(true);
 
   useEffect(() => {
     getUsername();
@@ -28,17 +30,22 @@ const capilarDiagnostic = ({navigation}) => {
     const options = {
       noData: true,
     };
+    const st = true;
 
     ImagePicker.launchImageLibrary(options, (response) => {
       console.log('response', response);
       if (response.uri) {
         setPhoto(response);
         //const base64Value = response.data;
-        const base64Value = ImgToBase64.getBase64String(response.uri);
-        console.log(base64Value);
-        sendImage({base64Value});
+        changeNav(false);
       }
     });
+  };
+
+  const handleSendImage = () => {
+    /* const base64Value = ImgToBase64.getBase64String(response.uri);
+        console.log(base64Value);
+        sendImage({base64Value}); */
   };
 
   return (
@@ -52,15 +59,27 @@ const capilarDiagnostic = ({navigation}) => {
       <Space />
 
       <View style={styles.viewButton}>
-        <Button
-          style={styles.buttonDC}
-          color="#5A5757"
-          title="Diagnóstico Capilar"
-          //onPress={() => navigation.navigate('Resultado')}
-          onPress={handleChoosePhoto}
-        />
+        {nav ? (
+          <Button
+            style={styles.buttonDC}
+            color="#5A5757"
+            title="Escolher Imagem"
+            onPress={handleChoosePhoto}
+          />
+        ) : (
+          <Button
+            style={styles.buttonDC}
+            color="#5A5757"
+            title="Efetuar Diagnostico"
+            onPress={handleSendImage}
+          />
+        )}
       </View>
-      <Text style={styles.textPF}>Selecione uma fotografia.</Text>
+      {nav ? null : (
+        <TouchableOpacity onPress={handleChoosePhoto}>
+          <Text style={styles.textPF}>Selecionar outra imagem</Text>
+        </TouchableOpacity>
+      )}
       <Space />
       <Space />
       <Space />

@@ -11,7 +11,6 @@ const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
   return (
     <>
       <Spacer />
-
       <Input
         style={styles.inputText}
         label="Email"
