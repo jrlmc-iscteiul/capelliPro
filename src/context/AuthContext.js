@@ -103,7 +103,7 @@ const sendSurvey = (dispatch) => async ({
   try {
     console.log('sendSurvey');
 
-    const response = await ServerApi.post('/api/Survey/survey', {
+    await ServerApi.post('/api/Survey/survey', {
       age,
       hairType,
       hairColour,
@@ -114,7 +114,6 @@ const sendSurvey = (dispatch) => async ({
       useThermalProducts,
       desiredHair,
     });
-    console.log('done ' + response);
 
     navigate('Perfil');
   } catch (err) {
@@ -126,36 +125,31 @@ const sendSurvey = (dispatch) => async ({
   }
 };
 
-const sendImage = dispatch => {
-  return async ({image}) => {
-    try {
-      console.log('sendImage');
-      const response = await ServerApi.post('/api/', {image}); //mudar
-    } catch (error) {
-      console.log(error);
-      dispatch({
-        type: 'add_error',
-        payload: 'Something went wrong with survey',
-      });
-    }
-  };
-};
-
-/* const getUsername = (dispatch) => async({}) => {
+const sendImage = (dispatch) => async (image) => {
   try {
-    console.log('getUsername');
-
-    const response = await ServerApi.get('/api/Auth/GetUserName');
-    return response;
-
+    console.log('sendImage');
+    await ServerApi.post('/api/ImageCapilar/imageCapilar', {
+      base64Image: image,
+    });
   } catch (error) {
     console.log(error);
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong with send image',
+    });
   }
 };
- */
 
 export const {Provider, Context} = createDataContext(
   authReducer,
-  {signin, signup, signout, clearErrorMessage, tryLocalSignin, sendSurvey, sendImage},
+  {
+    signin,
+    signup,
+    signout,
+    clearErrorMessage,
+    tryLocalSignin,
+    sendSurvey,
+    sendImage,
+  },
   {token: null, errorMessage: ''},
 );
