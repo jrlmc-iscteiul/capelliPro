@@ -126,19 +126,19 @@ const sendSurvey = (dispatch) => async ({
   }
 };
 
-const sendImage = dispatch => {
-  return async ({image}) => {
-    try {
-      console.log('sendImage');
-      const response = await ServerApi.post('/api/', {image}); //mudar
-    } catch (error) {
-      console.log(error);
-      dispatch({
-        type: 'add_error',
-        payload: 'Something went wrong with survey',
-      });
-    }
-  };
+const sendImage = (dispatch) => async (image) => {
+  try {
+    console.log('sendImage');
+    await ServerApi.post('/api/ImageCapilar/imageCapilar', {
+      base64Image: image,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong with send image',
+    });
+  }
 };
 
 /* const getUsername = (dispatch) => async({}) => {
@@ -156,6 +156,14 @@ const sendImage = dispatch => {
 
 export const {Provider, Context} = createDataContext(
   authReducer,
-  {signin, signup, signout, clearErrorMessage, tryLocalSignin, sendSurvey, sendImage},
+  {
+    signin,
+    signup,
+    signout,
+    clearErrorMessage,
+    tryLocalSignin,
+    sendSurvey,
+    sendImage,
+  },
   {token: null, errorMessage: ''},
 );

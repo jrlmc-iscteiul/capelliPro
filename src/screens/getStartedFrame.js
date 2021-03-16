@@ -9,7 +9,6 @@ import {
   Platform,
 } from 'react-native';
 import {Text} from 'react-native-elements';
-import Spacer from '../components/Spacer';
 
 class GetStartedFrame extends React.Component {
   render() {

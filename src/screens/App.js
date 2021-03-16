@@ -29,7 +29,6 @@ import LoginFrame from './loginFrame';
 import Survey from './Survey';
 import Settings from './settings';
 import CapilarDiagnosticResult from './capilarDiagnosticResult';
-import ImagePickerScreen from './ImagePickerScreen';
 
 import {Provider as AuthProvider} from '../context/AuthContext';
 import {setNavigator} from '../navigationRef';
@@ -63,9 +62,6 @@ const switchNavigator = createSwitchNavigator({
       },
       Resultado: {
         screen: CapilarDiagnosticResult,
-      },
-      ImagePicker: {
-        screen: ImagePickerScreen,
       },
     },
     {

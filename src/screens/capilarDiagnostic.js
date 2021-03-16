@@ -14,7 +14,6 @@ import Space from '../components/space';
 import useUserInfo from '../hooks/useUserInfo';
 import * as ImagePicker from 'react-native-image-picker';
 import {Context as AuthContext} from '../context/AuthContext';
-import ImgToBase64 from 'react-native-image-base64';
 
 const capilarDiagnostic = ({navigation}) => {
   const [getUsername, name] = useUserInfo();
@@ -30,32 +29,29 @@ const capilarDiagnostic = ({navigation}) => {
     const options = {
       noData: true,
     };
-    const st = true;
 
     ImagePicker.launchImageLibrary(options, (response) => {
       console.log('response', response);
       if (response.uri) {
         setPhoto(response);
-        //const base64Value = response.data;
         changeNav(false);
       }
     });
   };
 
   const handleSendImage = () => {
-    /* const base64Value = ImgToBase64.getBase64String(response.uri);
-        console.log(base64Value);
-        sendImage({base64Value}); */
+    const photoTest = photo.base64;
+    sendImage(photoTest);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <Headerr navigation={navigation} name={name} />
 
-      {photo && (
-        <Image source={{uri: photo.uri}} style={{width: 300, height: 300}} />
-      )}
-      <Image style={styles.img} source={require('../Imagens/Img5.png')} />
+      {photo && <Image source={{uri: photo.uri}} style={styles.img} />}
+      {nav ? (
+        <Image style={styles.img} source={require('../Imagens/Img5.png')} />
+      ) : null}
       <Space />
 
       <View style={styles.viewButton}>
@@ -93,7 +89,6 @@ const capilarDiagnostic = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
     justifyContent: 'flex-start',
     flexDirection: 'column',
     backgroundColor: '#fff',
@@ -107,7 +102,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   viewButton: {
-    //backgroundColor: 'blue',
     width: '80%',
     height: 54,
     borderRadius: 10,
@@ -118,7 +112,6 @@ const styles = StyleSheet.create({
   buttonDC: {
     height: 54,
     alignItems: 'center',
-    // borderRadius='30',
   },
   img: {
     alignSelf: 'center',
