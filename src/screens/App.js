@@ -30,8 +30,6 @@ import Survey from './Survey';
 import Settings from './settings';
 import CapilarDiagnosticResult from './capilarDiagnosticResult';
 import ImagePickerScreen from './ImagePickerScreen';
-import CameraScreen from './CameraScreen';
-import NetInfoScreen from './NetInfoScreen';
 
 import {Provider as AuthProvider} from '../context/AuthContext';
 import {setNavigator} from '../navigationRef';
@@ -48,12 +46,6 @@ const switchNavigator = createSwitchNavigator({
 
   mainFlow: createDrawerNavigator(
     {
-      NetInfo: {
-        screen: NetInfoScreen,
-      },
-      ImagePicker: {
-        screen: ImagePickerScreen,
-      },
       Perfil: {
         screen: Dashboard,
       },
@@ -71,6 +63,9 @@ const switchNavigator = createSwitchNavigator({
       },
       Resultado: {
         screen: CapilarDiagnosticResult,
+      },
+      ImagePicker: {
+        screen: ImagePickerScreen,
       },
     },
     {

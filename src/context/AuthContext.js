@@ -44,7 +44,6 @@ const signin = (dispatch) => async ({username, password}) => {
       payload: 'Something went wrong with sign in',
     });
   }
-
   try {
     const HasValidSurvey = await ServerApi.get('/api/Survey/HasValidSurvey');
     navigate('mainFlow');
@@ -64,7 +63,6 @@ const signup = (dispatch) => async ({name, email, password}) => {
       password,
     });
     navigate('Signin');
-
   } catch (err) {
     console.log(err);
     console.log('catch:');
@@ -91,12 +89,31 @@ const tryLocalSignin = (dispatch) => async () => {
   }
 };
 
-const sendSurvey = (dispatch) => async ({age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair}) => {
+const sendSurvey = (dispatch) => async ({
+  age,
+  hairType,
+  hairColour,
+  hasColouredHair,
+  numberWashes,
+  livingPlace,
+  useHeatTools,
+  useThermalProducts,
+  desiredHair,
+}) => {
   try {
     console.log('sendSurvey');
 
-    const response = await ServerApi.post('/api/Survey/survey', {age, hairType, hairColour, hasColouredHair, numberWashes, livingPlace, useHeatTools, useThermalProducts, desiredHair});
-    console.log('done ' + response);
+    await ServerApi.post('/api/Survey/survey', {
+      age,
+      hairType,
+      hairColour,
+      hasColouredHair,
+      numberWashes,
+      livingPlace,
+      useHeatTools,
+      useThermalProducts,
+      desiredHair,
+    });
 
     navigate('Perfil');
   } catch (err) {
@@ -108,21 +125,31 @@ const sendSurvey = (dispatch) => async ({age, hairType, hairColour, hasColouredH
   }
 };
 
-const getUsername = (dispatch) => async({}) => {
+const sendImage = (dispatch) => async (image) => {
   try {
-    console.log('getUsername');
-
-    const response = await ServerApi.get('/api/Auth/GetUserName');
-    return response;
-
+    console.log('sendImage');
+    await ServerApi.post('/api/ImageCapilar/imageCapilar', {
+      base64Image: image,
+    });
   } catch (error) {
     console.log(error);
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong with send image',
+    });
   }
 };
 
-
 export const {Provider, Context} = createDataContext(
   authReducer,
-  {signin, signup, signout, clearErrorMessage, tryLocalSignin, sendSurvey},
+  {
+    signin,
+    signup,
+    signout,
+    clearErrorMessage,
+    tryLocalSignin,
+    sendSurvey,
+    sendImage,
+  },
   {token: null, errorMessage: ''},
 );
