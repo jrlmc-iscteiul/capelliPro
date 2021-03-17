@@ -141,18 +141,6 @@ const sendImage = (dispatch) => async (image) => {
   }
 };
 
-/* const getUsername = (dispatch) => async({}) => {
-  try {
-    console.log('getUsername');
-
-    const response = await ServerApi.get('/api/Auth/GetUserName');
-    return response;
-
-  } catch (error) {
-    console.log(error);
-  }
-};
- */
 
 export const {Provider, Context} = createDataContext(
   authReducer,

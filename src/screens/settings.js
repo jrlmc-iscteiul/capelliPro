@@ -8,11 +8,11 @@ import {
   Text,
   StatusBar,
   Image,
-  Switch
+  Switch,
 } from 'react-native';
 
 import Space from '../components/space';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
   container: {
@@ -22,59 +22,54 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   textT: {
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontWeight: "bold",
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
     fontSize: 14,
     left: 20,
-    color: "#D3D3D3"
-
+    color: '#D3D3D3',
   },
   textB: {
-    fontFamily: "Roboto",
-    fontStyle: "normal",
-    fontWeight: "bold",
+    fontFamily: 'Roboto',
+    fontStyle: 'normal',
+    fontWeight: 'bold',
     fontSize: 16,
     left: 20,
   },
   viewT: {
-    backgroundColor: "#5A5757",
+    backgroundColor: '#5A5757',
     height: 25,
     width: '100%',
     borderColor: 'black',
     borderWidth: 2,
   },
   viewB: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     height: 45,
     width: '100%',
     borderColor: 'black',
     borderWidth: 1,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   center: {
     justifyContent: 'center',
   },
   centerButton: {
     justifyContent: 'center',
-    right: 30
+    right: 30,
   },
   containerButton: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    height: 45
+    height: 45,
   },
-
 });
 
 export default function Settings() {
-
   const [switchNotific, setSwitchNotif] = React.useState(false);
   const [switchNoite, setSwitchNoite] = React.useState(false);
   return (
-
     <SafeAreaView style={styles.container}>
-
       <View style={styles.viewT}>
         <Text style={styles.textT}>Notificações</Text>
       </View>
@@ -84,8 +79,10 @@ export default function Settings() {
           <Text style={styles.textB}>Ativar notificações</Text>
         </View>
         <View style={styles.centerButton}>
-          <Switch value={switchNotific}
-            onValueChange={(value) => setSwitchNotif(value)} />
+          <Switch
+            value={switchNotific}
+            onValueChange={(value) => setSwitchNotif(value)}
+          />
         </View>
       </View>
 
@@ -98,8 +95,10 @@ export default function Settings() {
           <Text style={styles.textB}>Modo noite</Text>
         </View>
         <View style={styles.centerButton}>
-          <Switch value={switchNoite}
-            onValueChange={(v) => setSwitchNoite(v)} />
+          <Switch
+            value={switchNoite}
+            onValueChange={(v) => setSwitchNoite(v)}
+          />
         </View>
       </View>
       <View style={styles.viewT}>
@@ -112,13 +111,11 @@ export default function Settings() {
         <Text style={styles.textB}>Versão</Text>
       </View>
 
-
       <Space />
       <Space />
       <Space />
       <Space />
       <Space />
-
     </SafeAreaView>
-  )
+  );
 }

@@ -27,11 +27,11 @@ const capilarDiagnostic = ({navigation}) => {
 
   const handleChoosePhoto = () => {
     const options = {
-      noData: true,
+      includeBase64: true,
     };
 
     ImagePicker.launchImageLibrary(options, (response) => {
-      console.log('response', response);
+      //console.log('response', response);
       if (response.uri) {
         setPhoto(response);
         changeNav(false);
