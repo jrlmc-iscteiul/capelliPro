@@ -52,6 +52,7 @@ const AuthFormRegister = ({
 
       <Input
         style={styles.inputText}
+        secureTextEntry
         label="Password"
         placeholder="Confirme a sua password"
       />

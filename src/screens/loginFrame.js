@@ -6,6 +6,7 @@ import {
   StatusBar,
   Image,
   Platform,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {Text} from 'react-native-elements';
 import Spacer from '../components/Spacer';
@@ -19,7 +20,7 @@ const LoginFrame = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.view}>
+      <KeyboardAvoidingView style={styles.view}>
         <Text style={styles.titleText}>Bem-vindo a bordo!</Text>
 
         <Spacer />
@@ -53,7 +54,7 @@ const LoginFrame = () => {
           style={styles.image2}
           source={require('../Imagens/googleLogo.png')}
         />
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
