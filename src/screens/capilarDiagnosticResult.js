@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   viewGrey: {
-    justifyContent:'center',
+    justifyContent: 'center',
     backgroundColor: '#e8e8e8',
     height: 40,
   },

@@ -4,12 +4,15 @@ import {SafeAreaView, StyleSheet, Text, Image} from 'react-native';
 import Headerr from '../components/header';
 import Space from '../components/space';
 import useUserInfo from '../hooks/useUserInfo';
+import useStatistics from '../hooks/useStatistics';
 
 const Statistics = ({navigation}) => {
   const [getUsername, name] = useUserInfo();
+  const [getStatistic, graph, number, date] = useStatistics();
 
   useEffect(() => {
     getUsername();
+    getStatistic();
   }, []);
 
   return (
@@ -18,10 +21,19 @@ const Statistics = ({navigation}) => {
 
       <Text style={styles.textStats}>Estatísticas</Text>
       <Space />
-      <Text style={styles.textNum}>Número de diagnósticos num ano: 8</Text>
+      <Text style={styles.textNum}>
+        Número de diagnósticos desde sempre: {number}
+      </Text>
       <Space />
-      <Image style={styles.imgGraph} source={require('../Imagens/graph.png')} />
-      <Space />
+      <Image
+        style={{
+          width: 400,
+          height: 300,
+          resizeMode: 'contain',
+        }}
+        source={{uri: `data:image/png;base64,${graph}`}}
+      />
+
       <Space />
       <Space />
     </SafeAreaView>
@@ -56,6 +68,11 @@ const styles = StyleSheet.create({
     width: 225,
     height: 256,
     alignSelf: 'center',
+  },
+  img: {
+    alignSelf: 'center',
+    width: 210,
+    height: 180,
   },
 });
 
