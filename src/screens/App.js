@@ -29,19 +29,21 @@ import LoginFrame from './loginFrame';
 import Survey from './Survey';
 import Settings from './settings';
 import CapilarDiagnosticResult from './capilarDiagnosticResult';
+import ForgotPassword from './ForgotPasswordScreen';
 
 import {Provider as AuthProvider} from '../context/AuthContext';
 import {setNavigator} from '../navigationRef';
 
 const switchNavigator = createSwitchNavigator({
-   ResolveAuth: ResolveAuthScreen,
+  ResolveAuth: ResolveAuthScreen,
 
   loginFlow: createStackNavigator({
     getStarted: GetStarted,
     Signup: RegisterFrame,
     Signin: LoginFrame,
+    ForgotPassword: ForgotPassword,
     Survey: Survey,
-  }), 
+  }),
 
   mainFlow: createDrawerNavigator(
     {

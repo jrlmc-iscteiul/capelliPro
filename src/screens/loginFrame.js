@@ -8,7 +8,7 @@ import {
   Platform,
   KeyboardAvoidingView,
 } from 'react-native';
-import {Text} from 'react-native-elements';
+import {Text, Button} from 'react-native-elements';
 import Spacer from '../components/Spacer';
 import NavLink from '../components/NavLink';
 import {NavigationEvents} from 'react-navigation';
@@ -38,9 +38,11 @@ const LoginFrame = () => {
           submitButtonText="Iniciar Sessão"
         />
 
-        <View style={styles.passwordTextContainer}>
-          <Text style={styles.passwordText}>Esqueceu-se da password?</Text>
-        </View>
+        <NavLink
+          routeName="ForgotPassword"
+          text="Esqueceu-se da password?"
+          text2=""
+        />
 
         <NavLink
           routeName="Signup"
@@ -48,12 +50,12 @@ const LoginFrame = () => {
           text2="Registe-se"
         />
 
-        <Text style={styles.text}> Ou iniciar sessão com: </Text>
+        {/* <Text style={styles.text}> Ou iniciar sessão com: </Text>
 
         <Image
           style={styles.image2}
           source={require('../Imagens/googleLogo.png')}
-        />
+        /> */}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -90,11 +92,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     alignSelf: 'center',
-  },
-  passwordTextContainer: {
-    //backgroundColor: 'pink',
-    width: '100%',
-    height: 20,
   },
   passwordText: {
     fontSize: 16,

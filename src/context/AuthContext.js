@@ -132,6 +132,7 @@ const sendImage = (dispatch) => async (image) => {
     await ServerApi.post('/api/ImageCapilar/imageCapilar', {
       base64Image: image,
     });
+    navigate('Resultado');
   } catch (error) {
     console.log(error);
     dispatch({

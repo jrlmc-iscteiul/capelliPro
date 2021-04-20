@@ -14,6 +14,7 @@ import Space from '../components/space';
 import useUserInfo from '../hooks/useUserInfo';
 import * as ImagePicker from 'react-native-image-picker';
 import {Context as AuthContext} from '../context/AuthContext';
+import {navigate} from '../navigationRef';
 
 const capilarDiagnostic = ({navigation}) => {
   const [getUsername, name] = useUserInfo();

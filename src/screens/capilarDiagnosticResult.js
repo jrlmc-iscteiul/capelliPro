@@ -29,15 +29,18 @@ const capilarDiagnosticResult = ({navigation}) => {
           {'- '}
           {disease}
         </Text>
+
         <Space />
         <View style={styles.viewGrey}>
           <Text style={styles.textSoluc}>Soluções:</Text>
         </View>
         <Space />
-        <Text style={styles.textSolucR}>
-          {'- '}
-          {solution}
-        </Text>
+        <View style={styles.viewTextProblem}>
+          <Text style={styles.textSolucR}>
+            {'- '}
+            {solution}
+          </Text>
+        </View>
         <Space />
         <Space />
         <Space />
@@ -109,6 +112,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#e8e8e8',
     height: 40,
+  },
+  viewTextProblem: {
+    justifyContent: 'center',
+    borderColor: 'red',
+    borderRadius: 5,
+    width: '95%',
+    height: 72,
+    bottom: 15,
   },
 });
 
