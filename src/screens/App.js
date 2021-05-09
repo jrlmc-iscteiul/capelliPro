@@ -50,16 +50,16 @@ const switchNavigator = createSwitchNavigator({
       Perfil: {
         screen: Dashboard,
       },
-      Diagnostico: {
+      Diagnóstico: {
         screen: CapilarDiagnostic,
       },
-      Estatisticas: {
+      Estatísticas: {
         screen: Statistics,
       },
-      Previsoes: {
+      Previsões: {
         screen: Forecasts,
       },
-      Configuracoes: {
+      Configurações: {
         screen: Settings,
       },
       Resultado: {
