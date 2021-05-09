@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Alert} from 'react-native';
 import {Text, Button, Input} from 'react-native-elements';
 import {View} from 'react-native';
 import Spacer from './Spacer';
@@ -7,6 +7,16 @@ import Spacer from './Spacer';
 const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const createButtonAlert = () =>
+    Alert.alert('Password incorreta', 'Coloque a password novamente', [
+      {
+        text: 'Cancel',
+        onPress: () => console.log('Cancel Pressed'),
+        style: 'cancel',
+      },
+      {text: 'OK', onPress: () => console.log('OK Pressed')},
+    ]);
 
   return (
     <>

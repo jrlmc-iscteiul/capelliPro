@@ -38,17 +38,18 @@ const signin = (dispatch) => async ({username, password}) => {
 
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({type: 'signin', payload: response.data.token});
+
+    try {
+      const HasValidSurvey = await ServerApi.get('/api/Survey/HasValidSurvey');
+      navigate('mainFlow');
+    } catch (error) {
+      navigate('Survey');
+    }
   } catch (err) {
     dispatch({
       type: 'add_error',
-      payload: 'Something went wrong with sign in',
+      payload: 'Password incorreta. Tente novamente.',
     });
-  }
-  try {
-    const HasValidSurvey = await ServerApi.get('/api/Survey/HasValidSurvey');
-    navigate('mainFlow');
-  } catch (error) {
-    navigate('Survey');
   }
 };
 
@@ -142,6 +143,19 @@ const sendImage = (dispatch) => async (image) => {
   }
 };
 
+const forgotPassword = (dispatch) => async (email) => {
+  try {
+    console.log('forgotPassword');
+    console.log(email);
+    await ServerApi.post('/api/Auth/ForgotPassword', {email});
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: 'add_error',
+      payload: 'Something went wrong',
+    });
+  }
+};
 
 export const {Provider, Context} = createDataContext(
   authReducer,
@@ -153,6 +167,7 @@ export const {Provider, Context} = createDataContext(
     tryLocalSignin,
     sendSurvey,
     sendImage,
+    forgotPassword,
   },
   {token: null, errorMessage: ''},
 );

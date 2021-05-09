@@ -26,7 +26,7 @@ function Menu() {
 
         <View style={styles.buttons}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Diagnostico')}>
+            onPress={() => this.props.navigation.navigate('Diagnóstico')}>
             <Image
               style={styles.imageMenu}
               source={require('../Imagens/diagnostico.png')}
@@ -36,7 +36,7 @@ function Menu() {
 
         <View style={styles.buttons}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Estatisticas')}>
+            onPress={() => this.props.navigation.navigate('Estatísticas')}>
             <Image
               style={styles.imageMenu}
               source={require('../Imagens/estatisticas.png')}
@@ -46,7 +46,7 @@ function Menu() {
 
         <View style={styles.buttons}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Previsoes')}>
+            onPress={() => this.props.navigation.navigate('Previsões')}>
             <Image
               style={styles.imageMenu}
               source={require('../Imagens/previsoes.png')}

@@ -8,9 +8,15 @@ import {
 } from 'react-native';
 import {Text, Button, Input} from 'react-native-elements';
 import Spacer from '../components/Spacer';
+import {Context as AuthContext} from '../context/AuthContext';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const {state, forgotPassword} = useContext(AuthContext);
+
+  const handleForgotPassword = () => {
+    forgotPassword(email);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,7 +38,7 @@ const ForgotPassword = () => {
           <Button
             buttonStyle={{backgroundColor: '#5A5757'}}
             title="Enviar email"
-            onPress={() => console.log('enviar email')}
+            onPress={handleForgotPassword}
           />
         </View>
       </View>
